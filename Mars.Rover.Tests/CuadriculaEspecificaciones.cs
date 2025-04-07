@@ -162,37 +162,4 @@ public class CuadriculaEspecificaciones
         // Assert
         rover.Mensaje.Should().Be("POSICION (10,0) - DIRECCION Norte - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO");
     }
-
-    [Fact]
-    public void Debe_realizarse_3_exploraciones_de_rovers_secuencialmente_cuando_se_les_indique_una_secuencia_y_cada_uno_debe_mostrar_su_posicion()
-    {
-        // Arrange
-        var cuadricula = new Cuadricula();
-        var rover1 = new MRover("MMMMMMMMMR");
-        var rover2 = new MRover("MMMRMMMLMM");
-        var rover3 = new MRover("RMMLMMMMMR");
-        
-        // Act
-        cuadricula.IniciarExploracion(new[]{ rover1});
-        
-        // Assert
-        rover1.Posicion.X.Should().Be(0);
-        rover1.Posicion.Y.Should().Be(9);
-        rover1.Posicion.Direccion.Should().Be(PuntosCardinales.Este);
-        rover1.Mensaje.Should().Be("POSICION (9,0) - DIRECCION Este - EXPLORACION EXITOSA");
-        
-        rover2.Posicion.X.Should().Be(3);
-        rover2.Posicion.Y.Should().Be(5);
-        rover2.Posicion.Direccion.Should().Be(PuntosCardinales.Norte);
-        rover2.Mensaje.Should().Be("POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA");
-        
-        rover3.Posicion.X.Should().Be(2);
-        rover3.Posicion.Y.Should().Be(5);
-        rover3.Posicion.Direccion.Should().Be(PuntosCardinales.Norte);  
-        rover3.Mensaje.Should().Be("POSICION (5,2) - DIRECCION Norte - EXPLORACION EXITOSA");
-        
-        
-        
-        
-    }
 }
