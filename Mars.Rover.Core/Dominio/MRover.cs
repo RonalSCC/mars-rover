@@ -16,7 +16,7 @@ public class MRover
             Comandos.Add(comando);
     }
 
-    public void IniciarExploracionRover()
+    public void IniciarExploracion()
     {
         foreach (var comando in Comandos)
         {

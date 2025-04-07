@@ -4,17 +4,16 @@ namespace Mars.Rover.Tests;
 
 using FluentAssertions;
 
-public class CuadriculaEspecificaciones
+public class RoverEspecificaciones
 {
     [Fact]
     public void Debe_iniciar_el_rover_su_exploracion_en_la_posicion_0_0_N()
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover();
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.X.Should().Be(0);
@@ -26,12 +25,11 @@ public class CuadriculaEspecificaciones
     public void Debe_iniciar_el_rover_su_exploracion_sobre_la_cuadricula_en_la_posicion_1_2_N()
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var posicionInicial = new Posicion(1, 2, PuntosCardinales.Norte);
         var rover = new MRover("", posicionInicial);
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.X.Should().Be(1);
@@ -44,11 +42,10 @@ public class CuadriculaEspecificaciones
         Debe_avanzar_el_rover_una_celda_hacia_adelante_cuando_tenga_espacio_en_la_cuadricula_y_se_indique_el_comando_M()
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover("M");
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.X.Should().Be(0);
@@ -60,11 +57,10 @@ public class CuadriculaEspecificaciones
     public void Debe_girar_el_rover_a_la_derecha_cuando_reciba_el_comando_R()
     {
         // Arrange 
-        var cuadricula = new Cuadricula();
         var rover = new MRover("R");
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.Direccion.Should().Be(PuntosCardinales.Este);
@@ -74,11 +70,10 @@ public class CuadriculaEspecificaciones
     public void Debe_girar_el_rover_a_la_izquierda_cuando_reciba_el_comando_L()
     {
         // Arrange 
-        var cuadricula = new Cuadricula();
         var rover = new MRover("L");
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.Direccion.Should().Be(PuntosCardinales.Oeste);
@@ -88,11 +83,10 @@ public class CuadriculaEspecificaciones
     public void Debe_mirar_el_rover_al_sur_cuando_se_le_indiquen_dos_comandos_de_giro_y_este_en_0_0_N()
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover("LL");
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.Direccion.Should().Be(PuntosCardinales.Sur);
@@ -103,11 +97,10 @@ public class CuadriculaEspecificaciones
         Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_este_en_0_0_N_y_su_comando_sea_L_y_M()
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover("LM");
 
         // Act
-        var resultadoExploracion = () => cuadricula.IniciarExploracion(rover);
+        var resultadoExploracion = () => rover.IniciarExploracion();
 
         // Assert
         resultadoExploracion.Should().ThrowExactly<SinEspacioException>();
@@ -120,11 +113,10 @@ public class CuadriculaEspecificaciones
             string comando, Posicion posicionEsperada,string mensajeEsperado)
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover(comando);
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.X.Should().Be(posicionEsperada.X);
@@ -141,11 +133,10 @@ public class CuadriculaEspecificaciones
         )
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover(comando, posicionInicial);
 
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Posicion.X.Should().Be(posicionEsperada.X);
@@ -159,10 +150,10 @@ public class CuadriculaEspecificaciones
         Debe_realizar_la_exploración_el_rover_cuando_se_le_indiquen_más_de_10_comandos_y_arrojar_un_mensaje_de_su_posición_junto_a_Exploración_finalizada_Maximo_de_comandos_alcanzado()
     {
         // Arrange
-        var cuadricula = new Cuadricula();
         var rover = new MRover("MMMMMMMMMMRMMMMMMMMMM");
+        
         // Act
-        cuadricula.IniciarExploracion(rover);
+        rover.IniciarExploracion();
 
         // Assert
         rover.Mensaje.Should()
