@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "505/Wn6/sH0=",
+  "dgSpecHash": "/9wEU1ORTHE=",
   "success": true,
   "projectFilePath": "C:\\Devops\\Katas\\Mars.Rover\\Mars.Rover.Tests\\Mars.Rover.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ronal.castano\\.nuget\\packages\\coverlet.collector\\6.0.2\\coverlet.collector.6.0.2.nupkg.sha512",
+    "C:\\Users\\ronal.castano\\.nuget\\packages\\fluentassertions\\8.2.0\\fluentassertions.8.2.0.nupkg.sha512",
     "C:\\Users\\ronal.castano\\.nuget\\packages\\microsoft.codecoverage\\17.12.0\\microsoft.codecoverage.17.12.0.nupkg.sha512",
     "C:\\Users\\ronal.castano\\.nuget\\packages\\microsoft.net.test.sdk\\17.12.0\\microsoft.net.test.sdk.17.12.0.nupkg.sha512",
     "C:\\Users\\ronal.castano\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.12.0\\microsoft.testplatform.objectmodel.17.12.0.nupkg.sha512",
