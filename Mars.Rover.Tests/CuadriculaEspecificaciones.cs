@@ -79,7 +79,8 @@ public class MRover
     public MRover(string comando = "")
     {
         Comando = comando;
-        if(!string.IsNullOrEmpty(comando)) Avanzar();
+        if(comando is "M") Avanzar();
+        if (comando is "R") Direccion = "E";
     }
 
     private void Avanzar()
