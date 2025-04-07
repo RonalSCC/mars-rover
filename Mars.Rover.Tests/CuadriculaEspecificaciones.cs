@@ -32,9 +32,19 @@ public class CuadriculaEspecificaciones
     }
 }
 
-public class MRover(string comando = "")
+public class MRover
 {
     public string posicionActual = "0 0 N";
+
+    public MRover(string comando = "")
+    {
+        if(!string.IsNullOrEmpty(comando)) Avanzar();
+    }
+
+    private void Avanzar()
+    {
+        posicionActual = "0 1 N";
+    }
 }
 
 public class Cuadricula
