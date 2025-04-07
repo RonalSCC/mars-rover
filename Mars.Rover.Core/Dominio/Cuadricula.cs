@@ -6,4 +6,8 @@ public class Cuadricula
     {
         rover.IniciarExploracionRover();
     }
+
+    public void IniciarExploracion(MRover[] rover)
+    {
+    }
 }
