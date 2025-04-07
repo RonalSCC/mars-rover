@@ -27,7 +27,7 @@ public class CuadriculaEspecificaciones
     {
         // Arrange
         var cuadricula = new Cuadricula();
-        var rover = new MRover("M", 1,2, PuntosCardinales.Norte);
+        var rover = new MRover("", 1,2, PuntosCardinales.Norte);
 
         // Act
         cuadricula.IniciarExploracion(rover);

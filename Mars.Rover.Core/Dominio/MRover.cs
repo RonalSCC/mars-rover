@@ -10,6 +10,9 @@ public class MRover
 
     public MRover(string comandos = "", int posicionX = 0, int posicionY = 0, PuntosCardinales direccion = PuntosCardinales.Norte)
     {
+        PosicionX = posicionX;
+        PosicionY = posicionY;
+        Direccion = direccion;
         foreach (char comando in comandos)
         {
             Comandos.Add(comando);
