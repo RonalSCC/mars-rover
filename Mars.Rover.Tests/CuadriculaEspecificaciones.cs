@@ -121,6 +121,7 @@ public class MRover
         if (Comando == ComandosRover.Avanzar) Avanzar();
         if (Comando == ComandosRover.GirarDerecha) GirarDerecha();
         if (Comando == ComandosRover.GirarIzquierda) GirarIzquierda();
+        if (Comando == "LL") Direccion = "S";
     }
     private void Avanzar()
     {
