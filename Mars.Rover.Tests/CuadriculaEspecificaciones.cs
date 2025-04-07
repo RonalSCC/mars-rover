@@ -83,6 +83,13 @@ public class SinEspacioException : Exception
     public SinEspacioException(): base("No hay espacio para mover el rover"){}
 }
 
+public static class ComandosRover
+{
+    public const string Avanzar = "M";
+    public const string GirarDerecha = "R";
+    public const string GirarIzquierda = "L";
+}
+
 public class MRover
 {
     public int PosicionX = 0;
@@ -93,12 +100,14 @@ public class MRover
     public MRover(string comando = "")
     {
         Comando = comando;
-        if(comando is "M") Avanzar();
-        if(comando is "R") GirarDerecha();
-        if (comando is "L") Direccion = "O";
-
     }
-
+    
+    public void IniciarExploracionRover()
+    {
+        if (Comando == ComandosRover.Avanzar) Avanzar();
+        if (Comando == ComandosRover.GirarDerecha) GirarDerecha();
+        if (Comando == ComandosRover.GirarIzquierda) GirarIzquierda();
+    }
     private void Avanzar()
     {
         PosicionY++;
@@ -108,6 +117,11 @@ public class MRover
     {
         Direccion = "E";
     }
+    
+    private void GirarIzquierda()
+    {
+        Direccion = "O";
+    }
 }
 
 public class Cuadricula
@@ -116,5 +130,6 @@ public class Cuadricula
     {
         if(rover.Comando == "LM") 
             throw new SinEspacioException();
+        rover.IniciarExploracionRover();
     }
 }
