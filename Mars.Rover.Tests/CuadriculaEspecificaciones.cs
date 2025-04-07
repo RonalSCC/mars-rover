@@ -94,7 +94,9 @@ public class MRover
     {
         Comando = comando;
         if(comando is "M") Avanzar();
-        if (comando is "R") GirarDerecha();
+        if(comando is "R") GirarDerecha();
+        if (comando is "L") Direccion = "O";
+
     }
 
     private void Avanzar()
