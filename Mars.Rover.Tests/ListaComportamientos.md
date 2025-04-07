@@ -9,4 +9,4 @@
 - [x] Debe el rover indicar su posicion cuando se le indique una serie de comandos para su exploracion
 - [x] Debe realizar la exploración el rover cuando se le indiquen 10 comandos y arrojar un mensaje de su posición junto a "Exploración exitosa". 
 - [x] Debe realizar la exploración el rover cuando se le indiquen más de 10 comandos y arrojar un mensaje de su posición junto a "Exploración finalizada - Maximo de comandos alcanzado".
-- [ ] Debe el rover indicar su posicion cuando se le indique el comando correspondiente y una posicion inicial
+- [x] Debe el rover indicar su posicion cuando se le indique el comando correspondiente y una posicion inicial
