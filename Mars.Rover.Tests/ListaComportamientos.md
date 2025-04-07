@@ -1,5 +1,6 @@
 ## Casos
 - [x] Debe iniciar el rover su exploración sobre la cuadricula en la posición 0,0,N.
+- [ ] Debe iniciar el rover su exploracion sobre la cuadricula en la posición 1,2,N.
 - [x] Debe avanzar el rover una celda hacia adelante cuando tenga espacio en la cuadricula y se le indique el comando "M".
 - [x] Debe girar el rover a la derecha cuando reciba el comando "R".
 - [x] Debe girar el rover a la izquierda cuando reciba el comando "L".

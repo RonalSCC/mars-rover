@@ -8,7 +8,7 @@ public class MRover
     public List<char> Comandos { get; private set; } = new();
     public string Mensaje { get; set; } = string.Empty;
 
-    public MRover(string comandos = "")
+    public MRover(string comandos = "", int posicionX = 0, int posicionY = 0, PuntosCardinales direccion = PuntosCardinales.Norte)
     {
         foreach (char comando in comandos)
         {

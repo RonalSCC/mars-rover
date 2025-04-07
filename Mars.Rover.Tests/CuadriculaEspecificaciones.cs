@@ -23,6 +23,22 @@ public class CuadriculaEspecificaciones
     }
 
     [Fact]
+    public void Debe_iniciar_el_rover_su_exploracion_sobre_la_cuadricula_en_la_posicion_1_2_N()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("M", 1,2, PuntosCardinales.Norte);
+
+        // Act
+        cuadricula.IniciarExploracion(rover);
+        
+        // Assert
+        rover.PosicionX.Should().Be(1);
+        rover.PosicionY.Should().Be(2);
+        rover.Direccion.Should().Be(PuntosCardinales.Norte);
+    }
+
+    [Fact]
     public void Debe_avanzar_el_rover_una_celda_hacia_adelante_cuando_tenga_espacio_en_la_cuadricula_y_se_indique_el_comando_M()
     {
         // Arrange
@@ -114,20 +130,23 @@ public class CuadriculaEspecificaciones
         rover.Mensaje.Should().Be(mensajeEsperado);
     }
 
-    [Fact]
-    public void Debe_el_rover_realizar_una_exploracion_cuando_se_le_indiquen_10_comandos_y_arrojar_un_mensaje_de_su_posicion_junto_a_exploracionExitosa()
+    [Theory]
+    [InlineData("MMMMMMMMMM", 0, 10, PuntosCardinales.Norte, "POSICION (10,0) - DIRECCION Norte - EXPLORACION EXITOSA")]
+    [InlineData("MMMRMMMLMM", 3, 5, PuntosCardinales.Norte, "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA")]
+    [InlineData("MMMRMMMLMM", 3, 5, PuntosCardinales.Norte, "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA")]
+    public void Debe_el_rover_realizar_una_exploracion_cuando_se_le_indiquen_10_comandos_y_arrojar_un_mensaje_de_su_posicion_junto_a_exploracionExitosa(string comando, int posicionXEsperada, int posicionYEsperada, PuntosCardinales direccionEsperada, string mensajeEsperado)
     {
         // Arrange
         var cuadricula = new Cuadricula();
-        var rover = new MRover("MMMMMMMMMM");
+        var rover = new MRover(comando);
         
         // Act
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.PosicionX.Should().Be(0);
-        rover.PosicionY.Should().Be(10);
-        rover.Direccion.Should().Be(PuntosCardinales.Norte);
-        rover.Mensaje.Should().Be("POSICION (10,0) - DIRECCION Norte - EXPLORACION EXITOSA");
+        rover.PosicionX.Should().Be(posicionXEsperada);
+        rover.PosicionY.Should().Be(posicionYEsperada);
+        rover.Direccion.Should().Be(direccionEsperada);
+        rover.Mensaje.Should().Be(mensajeEsperado);
     }
 }

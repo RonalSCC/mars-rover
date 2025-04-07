@@ -13,6 +13,7 @@ Para controlar un rover, la NASA envía una simple secuencia de letras. Las posi
 ## Definiciones
 * El rover es un robot que ocupa el espacio de una celda de la cuadricula, no hace falta definir su tamaño.
 * El tamaño de la cuadricula es un espacio definido de 10 x 10, iniciando en 0,0. 
+* El rover puede definir su posición inicial en la cuadricula,
 * El rover puede girar sobre su eje viendo a 4 direcciones: Norte, Este, Sur y Oeste. Los comandos de giro son L-R. 
 * El rover tiene un comando para avanzar una celda, el comando es M.
 * El rover no puede moverse hacia atrás, por lo que para devolverse tiene que girar dos veces y avanzar adelante.
