@@ -5,6 +5,7 @@ public class MRover
     public Posicion Posicion { get; private set; } = new(0,0,PuntosCardinales.Norte);
     public List<char> Comandos { get; private set; } = new();
     public string Mensaje { get; set; } = string.Empty;
+    private int _cantidadComandosEjecutados = 0;
 
     public MRover(string comandos = "", int posicionX = 0, int posicionY = 0, PuntosCardinales direccion = PuntosCardinales.Norte)
     {
@@ -21,6 +22,8 @@ public class MRover
     {
         foreach (var comando in Comandos)
         {
+            if (_cantidadComandosEjecutados == 10)
+                break;
             switch (comando)
             {
                 case ComandosRover.Avanzar: Avanzar(); break;
@@ -29,6 +32,7 @@ public class MRover
             }
 
             ValidarEspacio();
+            _cantidadComandosEjecutados++;
         }
 
         Mensaje = MostrarPosicion();
@@ -72,6 +76,8 @@ public class MRover
         
         if(Comandos.Count() == 10)
             mensaje += " - EXPLORACION EXITOSA";
+        else if (Comandos.Count() > 10)
+            mensaje += " - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO";
         
         return mensaje;
     }
