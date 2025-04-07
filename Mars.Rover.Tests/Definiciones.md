@@ -16,7 +16,8 @@ Para controlar un rover, la NASA envía una simple secuencia de letras. Las posi
 * El rover puede girar sobre su eje viendo a 4 direcciones: Norte, Este, Sur y Oeste. Los comandos de giro son L-R. 
 * El rover tiene un comando para avanzar una celda, el comando es M.
 * El rover no puede moverse hacia atrás, por lo que para devolverse tiene que girar dos veces y avanzar adelante.
-* En la cuadricula puede estar un rover a la vez. 
+* El rover solo puede recibir un maximo de 10 comandos por exploración. 
+* En la cuadricula solo puede estar un rover a la vez. 
 * Una cuadricula la pueden explorar maximo 3 rovers en secuencias.
 
 ## Conceptos

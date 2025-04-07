@@ -1,0 +1,12 @@
+## Casos
+- [] Debe iniciar el rover su exploración sobre la cuadricula en la posición 0,0,N.
+- [] Debe avanzar el rover una celda hacia adelante cuando tenga espacio en la cuadricula y se le indique el comando "M".
+- [] Debe indicar error el rover cuando no tenga espacio para moverse adelante.
+- [] Debe girar el rover a la izquierda cuando reciba el comando "L".
+- [] Debe girar el rover a la derecha cuando reciba el comando "R".
+- [] Debe la cuadricula soportar la exploracion de un rover cuando se le indique una secuencia de comandos.
+- [] Debe realizar la exploración el rover cuando se le indiquen 10 comandos y arrojar un mensaje de su posición junto a "Exploración exitosa". 
+- [] Debe realizar la exploración el rover cuando se le indiquen más de 10 comandos y arrojar un mensaje de su posición junto a "Exploración finalizada - Maximo de comandos alcanzado".
+- [] Debe la cuadricula permitir exploraciones de 3 rovers secuencialmente cuando se les indique una sencuencia de comandos a cada uno.
+- [] Debe indicar error la cuadricula cuando se solicite una exploración de más de 3 rovers.
+
