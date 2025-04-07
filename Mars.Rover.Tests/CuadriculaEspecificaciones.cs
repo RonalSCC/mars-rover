@@ -60,9 +60,11 @@ public class MRover
     public int posicionX = 0;
     public int posicionY = 0;
     public string direccion = "N";
+    public string comandoActual { get; private set; }
 
     public MRover(string comando = "")
     {
+        comandoActual = comando;
         if(!string.IsNullOrEmpty(comando)) Avanzar();
     }
 
@@ -76,5 +78,7 @@ public class Cuadricula
 {
     public void IniciarExploracionRover(MRover rover)
     {
+        if(rover.comandoActual == "LM") 
+            throw new SinEspacioException();
     }
 }
