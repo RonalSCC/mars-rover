@@ -34,6 +34,25 @@ public class CuadriculaEspecificaciones
         rover.posicionY.Should().Be(1);
         rover.direccion.Should().Be("N");
     }
+    
+    [Fact]
+    public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("LM");
+        
+        // Act
+        var resultadoExploracion = () => cuadricula.IniciarExploracionRover(rover);
+        
+        // Assert
+        resultadoExploracion.Should().ThrowExactly<SinEspacioException>();
+    }
+}
+
+public class SinEspacioException : Exception
+{
+    public SinEspacioException(): base("No hay espacio para mover el rover"){}
 }
 
 public class MRover
