@@ -16,7 +16,7 @@ public class CuadriculaEspecificaciones
         // Assert
         rover.PosicionX.Should().Be(0);
         rover.PosicionY.Should().Be(0);
-        rover.Direccion.Should().Be("N");
+        rover.Direccion.Should().Be(PuntosCardinales.Norte);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class CuadriculaEspecificaciones
         // Assert
         rover.PosicionX.Should().Be(0);
         rover.PosicionY.Should().Be(1);
-        rover.Direccion.Should().Be("N");
+        rover.Direccion.Should().Be(PuntosCardinales.Norte);
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
         
         // Assert
-        rover.Direccion.Should().Be("E");
+        rover.Direccion.Should().Be(PuntosCardinales.Este);
     }
     
     [Fact]
@@ -60,7 +60,7 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
         
         // Assert
-        rover.Direccion.Should().Be("O");
+        rover.Direccion.Should().Be(PuntosCardinales.Oeste);
     }
 
     [Fact]
@@ -74,7 +74,7 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
         
         // Assert
-        rover.Direccion.Should().Be("S");
+        rover.Direccion.Should().Be(PuntosCardinales.Sur);
     }
 
     [Fact]
@@ -99,43 +99,77 @@ public class SinEspacioException : Exception
 
 public static class ComandosRover
 {
-    public const string Avanzar = "M";
-    public const string GirarDerecha = "R";
-    public const string GirarIzquierda = "L";
+    public const char Avanzar = 'M';
+    public const char GirarDerecha = 'R';
+    public const char GirarIzquierda = 'L';
+}
+
+public enum PuntosCardinales
+{
+    Norte,
+    Este,
+    Sur,
+    Oeste
 }
 
 public class MRover
 {
     public int PosicionX = 0;
     public int PosicionY = 0;
-    public string Direccion = "N";
-    public string Comando { get; private set; }
+    public PuntosCardinales Direccion = PuntosCardinales.Norte;
+    public List<char> Comandos { get; private set; } = new();
 
-    public MRover(string comando = "")
+    public MRover(string comandos = "")
     {
-        Comando = comando;
+        foreach (char comando in comandos)
+        {
+            Comandos.Add(comando);
+        }
     }
     
     public void IniciarExploracionRover()
     {
-        if (Comando == ComandosRover.Avanzar) Avanzar();
-        if (Comando == ComandosRover.GirarDerecha) GirarDerecha();
-        if (Comando == ComandosRover.GirarIzquierda) GirarIzquierda();
-        if (Comando == "LL") Direccion = "S";
+        foreach (var comando in Comandos)
+        {
+            switch (comando)
+            {
+                case ComandosRover.Avanzar: Avanzar(); break;
+                case ComandosRover.GirarDerecha: GirarDerecha(); break;
+                case ComandosRover.GirarIzquierda: GirarIzquierda(); break;
+            }
+
+            ValidarEspacio();
+        }
     }
     private void Avanzar()
     {
-        PosicionY++;
+        if (Direccion == PuntosCardinales.Norte)
+            PosicionY++;
+        else if (Direccion == PuntosCardinales.Este)
+            PosicionX++;
+        else if (Direccion == PuntosCardinales.Sur)
+            PosicionY--;
+        else
+            PosicionX--;
     }
     
     private void GirarDerecha()
     {
-        Direccion = "E";
+        Direccion++;
     }
     
     private void GirarIzquierda()
     {
-        Direccion = "O";
+        if(Direccion == PuntosCardinales.Norte)
+            Direccion = PuntosCardinales.Oeste;
+        else
+            Direccion--;
+    }
+    
+    private void ValidarEspacio()
+    {
+        if (PosicionY < 0 || PosicionX < 0)
+            throw new SinEspacioException();
     }
 }
 
@@ -143,8 +177,6 @@ public class Cuadricula
 {
     public void IniciarExploracion(MRover rover)
     {
-        if(rover.Comando == "LM") 
-            throw new SinEspacioException();
         rover.IniciarExploracionRover();
     }
 }
