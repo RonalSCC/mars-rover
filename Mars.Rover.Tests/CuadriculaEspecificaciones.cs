@@ -17,9 +17,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.PosicionX.Should().Be(0);
-        rover.PosicionY.Should().Be(0);
-        rover.Direccion.Should().Be(PuntosCardinales.Norte);
+        rover.Posicion.X.Should().Be(0);
+        rover.Posicion.Y.Should().Be(0);
+        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Norte);
     }
 
     [Fact]
@@ -33,9 +33,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
         
         // Assert
-        rover.PosicionX.Should().Be(1);
-        rover.PosicionY.Should().Be(2);
-        rover.Direccion.Should().Be(PuntosCardinales.Norte);
+        rover.Posicion.X.Should().Be(1);
+        rover.Posicion.Y.Should().Be(2);
+        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Norte);
     }
 
     [Fact]
@@ -49,9 +49,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.PosicionX.Should().Be(0);
-        rover.PosicionY.Should().Be(1);
-        rover.Direccion.Should().Be(PuntosCardinales.Norte);
+        rover.Posicion.X.Should().Be(0);
+        rover.Posicion.Y.Should().Be(1);
+        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Norte);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.Direccion.Should().Be(PuntosCardinales.Este);
+        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Este);
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.Direccion.Should().Be(PuntosCardinales.Oeste);
+        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Oeste);
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.Direccion.Should().Be(PuntosCardinales.Sur);
+        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Sur);
     }
 
     [Fact]
@@ -124,9 +124,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.PosicionX.Should().Be(posicionXEsperada);
-        rover.PosicionY.Should().Be(posicionYEsperada);
-        rover.Direccion.Should().Be(direccionEsperada);
+        rover.Posicion.X.Should().Be(posicionXEsperada);
+        rover.Posicion.Y.Should().Be(posicionYEsperada);
+        rover.Posicion.Direccion.Should().Be(direccionEsperada);
         rover.Mensaje.Should().Be(mensajeEsperado);
     }
 
@@ -144,9 +144,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.PosicionX.Should().Be(posicionXEsperada);
-        rover.PosicionY.Should().Be(posicionYEsperada);
-        rover.Direccion.Should().Be(direccionEsperada);
+        rover.Posicion.X.Should().Be(posicionXEsperada);
+        rover.Posicion.Y.Should().Be(posicionYEsperada);
+        rover.Posicion.Direccion.Should().Be(direccionEsperada);
         rover.Mensaje.Should().Be(mensajeEsperado);
     }
 }

@@ -2,17 +2,15 @@ namespace Mars.Rover.Core;
 
 public class MRover
 {
-    public int PosicionX = 0;
-    public int PosicionY = 0;
-    public PuntosCardinales Direccion = PuntosCardinales.Norte;
+    public Posicion Posicion { get; private set; } = new(0,0,PuntosCardinales.Norte);
     public List<char> Comandos { get; private set; } = new();
     public string Mensaje { get; set; } = string.Empty;
 
     public MRover(string comandos = "", int posicionX = 0, int posicionY = 0, PuntosCardinales direccion = PuntosCardinales.Norte)
     {
-        PosicionX = posicionX;
-        PosicionY = posicionY;
-        Direccion = direccion;
+        Posicion.X = posicionX;
+        Posicion.Y = posicionY;
+        Posicion.Direccion = direccion;
         foreach (char comando in comandos)
         {
             Comandos.Add(comando);
@@ -38,39 +36,39 @@ public class MRover
 
     private void Avanzar()
     {
-        if (Direccion == PuntosCardinales.Norte)
-            PosicionY++;
-        else if (Direccion == PuntosCardinales.Este)
-            PosicionX++;
-        else if (Direccion == PuntosCardinales.Sur)
-            PosicionY--;
+        if (Posicion.Direccion == PuntosCardinales.Norte)
+            Posicion.Y++;
+        else if (Posicion.Direccion == PuntosCardinales.Este)
+            Posicion.X++;
+        else if (Posicion.Direccion == PuntosCardinales.Sur)
+            Posicion.Y--;
         else
-            PosicionX--;
+            Posicion.X--;
     }
 
     private void GirarDerecha()
     {
-        Direccion++;
+        Posicion.Direccion++;
     }
 
     private void GirarIzquierda()
     {
-        if (Direccion == PuntosCardinales.Norte)
-            Direccion = PuntosCardinales.Oeste;
+        if (Posicion.Direccion == PuntosCardinales.Norte)
+            Posicion.Direccion = PuntosCardinales.Oeste;
         else
-            Direccion--;
+            Posicion.Direccion--;
     }
 
     private void ValidarEspacio()
     {
-        if (PosicionY < 0 || PosicionX < 0)
+        if (Posicion.Y < 0 || Posicion.X < 0)
             throw new SinEspacioException();
     }
     
     public string MostrarPosicion()
     {
         string direccionText = ObtenerTextoPuntoCardinal();
-        string mensaje =  $"POSICION ({PosicionY},{PosicionX}) - DIRECCION {direccionText}";
+        string mensaje =  $"POSICION ({Posicion.Y},{Posicion.X}) - DIRECCION {direccionText}";
         
         if(Comandos.Count() == 10)
             mensaje += " - EXPLORACION EXITOSA";
@@ -78,7 +76,7 @@ public class MRover
         return mensaje;
     }
 
-    private string ObtenerTextoPuntoCardinal() => Direccion switch
+    private string ObtenerTextoPuntoCardinal() => Posicion.Direccion switch
     {
         PuntosCardinales.Norte => "Norte",
         PuntosCardinales.Este => "Este",
