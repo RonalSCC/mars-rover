@@ -14,9 +14,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracionRover(rover);
 
         // Assert
-        rover.posicionX.Should().Be(0);
-        rover.posicionY.Should().Be(0);
-        rover.direccion.Should().Be("N");
+        rover.PosicionX.Should().Be(0);
+        rover.PosicionY.Should().Be(0);
+        rover.Direccion.Should().Be("N");
     }
 
     [Fact]
@@ -30,13 +30,13 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracionRover(rover);
         
         // Assert
-        rover.posicionX.Should().Be(0);
-        rover.posicionY.Should().Be(1);
-        rover.direccion.Should().Be("N");
+        rover.PosicionX.Should().Be(0);
+        rover.PosicionY.Should().Be(1);
+        rover.Direccion.Should().Be("N");
     }
     
     [Fact]
-    public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante()
+    public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_e_inicie_en_0_0_N()
     {
         // Arrange
         var cuadricula = new Cuadricula();
@@ -57,20 +57,20 @@ public class SinEspacioException : Exception
 
 public class MRover
 {
-    public int posicionX = 0;
-    public int posicionY = 0;
-    public string direccion = "N";
-    public string comandoActual { get; private set; }
+    public int PosicionX = 0;
+    public int PosicionY = 0;
+    public string Direccion = "N";
+    public string Comando { get; private set; }
 
     public MRover(string comando = "")
     {
-        comandoActual = comando;
+        Comando = comando;
         if(!string.IsNullOrEmpty(comando)) Avanzar();
     }
 
     private void Avanzar()
     {
-        posicionY++;
+        PosicionY++;
     }
 }
 
@@ -78,7 +78,7 @@ public class Cuadricula
 {
     public void IniciarExploracionRover(MRover rover)
     {
-        if(rover.comandoActual == "LM") 
+        if(rover.Comando == "LM") 
             throw new SinEspacioException();
     }
 }
