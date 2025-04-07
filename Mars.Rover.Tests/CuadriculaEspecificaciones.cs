@@ -90,6 +90,23 @@ public class CuadriculaEspecificaciones
         // Assert
         resultadoExploracion.Should().ThrowExactly<SinEspacioException>();
     }
+
+    [Fact]
+    public void Debe_el_rover_indicar_su_posicion_cuando_finalice_su_exploracion_segun_una_serie_de_comandos()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("MMRMMRMM");
+        
+        // Act
+        cuadricula.IniciarExploracion(rover);
+        
+        // Assert
+        rover.PosicionX.Should().Be(2);
+        rover.PosicionY.Should().Be(0);
+        rover.Direccion.Should().Be(PuntosCardinales.Sur);
+        rover.Mensaje.Should().Be("POSICION (0,2) - DIRECCION Sur");
+    }
 }
 
 public class SinEspacioException : Exception
@@ -118,6 +135,7 @@ public class MRover
     public int PosicionY = 0;
     public PuntosCardinales Direccion = PuntosCardinales.Norte;
     public List<char> Comandos { get; private set; } = new();
+    public string Mensaje { get; set; } = string.Empty;
 
     public MRover(string comandos = "")
     {
