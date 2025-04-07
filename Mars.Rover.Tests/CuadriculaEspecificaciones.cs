@@ -50,6 +50,20 @@ public class CuadriculaEspecificaciones
     }
     
     [Fact]
+    public void Debe_girar_el_rover_a_la_izquierda_cuando_reciba_el_comando_L()
+    {
+        // Arrange 
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("L");
+        
+        // Act
+        cuadricula.IniciarExploracionRover(rover);
+        
+        // Assert
+        rover.Direccion.Should().Be("O");
+    }
+    
+    [Fact]
     public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_este_en_0_0_N_y_su_comando_sea_L_y_M()
     {
         // Arrange
