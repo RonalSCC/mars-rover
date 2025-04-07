@@ -20,13 +20,12 @@ public class CuadriculaEspecificaciones
 
 public class MRover
 {
-    public string posicionActual;
+    public string posicionActual = "0 0 N";
 }
 
 public class Cuadricula
 {
     public void IniciarExploracionRover(MRover rover)
     {
-        throw new NotImplementedException();
     }
 }
