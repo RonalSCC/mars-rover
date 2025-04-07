@@ -48,7 +48,7 @@ public class CuadriculaEspecificaciones
         // Assert
         rover.Direccion.Should().Be("E");
     }
-
+    
     [Fact]
     public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_este_en_0_0_N_y_su_comando_sea_L_y_M()
     {
@@ -80,12 +80,17 @@ public class MRover
     {
         Comando = comando;
         if(comando is "M") Avanzar();
-        if (comando is "R") Direccion = "E";
+        if (comando is "R") GirarDerecha();
     }
 
     private void Avanzar()
     {
         PosicionY++;
+    }
+    
+    private void GirarDerecha()
+    {
+        Direccion = "E";
     }
 }
 
