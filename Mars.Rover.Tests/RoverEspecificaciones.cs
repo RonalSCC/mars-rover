@@ -26,7 +26,7 @@ public class RoverEspecificaciones
     public void Debe_iniciar_el_rover_su_exploracion_sobre_la_cuadricula_en_la_posicion_1_2_N()
     {
         // Arrange
-        var posicionInicial = new Posicion(1, 2, PuntosCardinales.Norte);
+        var posicionInicial = new Posicion(2 ,1, PuntosCardinales.Norte);
         var rover = new MRover("", posicionInicial);
 
         // Act
@@ -172,25 +172,25 @@ public class RoverEspecificaciones
             new object[]
             {
                 "MMMMMMMMMM",
-                new Posicion(0, 10, PuntosCardinales.Norte),
+                new Posicion(10, 0, PuntosCardinales.Norte),
                 "POSICION (10,0) - DIRECCION Norte - EXPLORACION EXITOSA",
             },
             new object[]
             {
                 "MMMRMMMLMM",
-                new Posicion(3, 5, PuntosCardinales.Norte),
+                new Posicion(5, 3, PuntosCardinales.Norte),
                 "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA"
             },
             new object[]
             {
                 "MMMRMRMMMR",
-                new Posicion(1, 0, PuntosCardinales.Oeste),
+                new Posicion(0,1, PuntosCardinales.Oeste),
                 "POSICION (0,1) - DIRECCION Oeste - EXPLORACION EXITOSA"
             },
             new object[]
             {
                 "RMMLMMLMML",
-                new Posicion(0, 2, PuntosCardinales.Sur),
+                new Posicion(2,0, PuntosCardinales.Sur),
                 "POSICION (2,0) - DIRECCION Sur - EXPLORACION EXITOSA"
             },
         };
@@ -201,15 +201,15 @@ public class RoverEspecificaciones
             new object[]
             {
                 "LMLMLMLMM",
-                new Posicion(1, 2, PuntosCardinales.Norte),
-                new Posicion(1, 3, PuntosCardinales.Norte),
+                new Posicion(2,1, PuntosCardinales.Norte),
+                new Posicion(3,1, PuntosCardinales.Norte),
                 "POSICION (3,1) - DIRECCION Norte",
             },
             new object[]
             {
                 "MMRMMRMRRM",
                 new Posicion(3,3, PuntosCardinales.Este),
-                new Posicion(5, 1, PuntosCardinales.Este),
+                new Posicion(1,5,PuntosCardinales.Este),
                 "POSICION (1,5) - DIRECCION Este - EXPLORACION EXITOSA"
             }
         };

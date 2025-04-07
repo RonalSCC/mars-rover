@@ -3,7 +3,7 @@ namespace Mars.Rover.Core;
 public class MRover
 {
     public Posicion Posicion { get; private set; } = new(0,0,PuntosCardinales.Norte);
-    public List<char> Comandos { get; private set; } = new();
+    private List<char> Comandos { get; set; } = new();
     public string Mensaje { get; set; } = "POSICION (0,0) - DIRECCION Norte";
     
     private int _cantidadComandosEjecutados = 0;
@@ -32,19 +32,18 @@ public class MRover
             AumentarComandosEjecutados();
         }
 
-        ActualizarMensajePosicion();
+        ActualizarMensajeSegunPosicion();
     }
 
     private void Avanzar()
     {
-        if (Posicion.Direccion == PuntosCardinales.Norte)
-            Posicion.Y++;
-        else if (Posicion.Direccion == PuntosCardinales.Este)
-            Posicion.X++;
-        else if (Posicion.Direccion == PuntosCardinales.Sur)
-            Posicion.Y--;
-        else
-            Posicion.X--;
+        switch (Posicion.Direccion)
+        {
+            case PuntosCardinales.Norte: Posicion.Y++; break;
+            case PuntosCardinales.Este: Posicion.X++; break;
+            case PuntosCardinales.Sur: Posicion.Y--; break;
+            default: Posicion.X--; break;
+        }
     }
 
     private void GirarDerecha()
@@ -74,16 +73,12 @@ public class MRover
         _cantidadComandosEjecutados++;
     }
     
-    public void ActualizarMensajePosicion()
+    private void ActualizarMensajeSegunPosicion()
     {
         string direccionText = ObtenerTextoPuntoCardinal();
         string mensaje =  $"POSICION ({Posicion.Y},{Posicion.X}) - DIRECCION {direccionText}";
         
-        if(Comandos.Count() == 10)
-            mensaje += " - EXPLORACION EXITOSA";
-        else if (Comandos.Count() > 10)
-            mensaje += " - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO";
-        
+        mensaje += ObtenerMensajeComplementario();
         Mensaje = mensaje;
     }
 
@@ -94,6 +89,13 @@ public class MRover
         PuntosCardinales.Sur => "Sur",
         PuntosCardinales.Oeste => "Oeste",
         _ => "Sin dirección"
+    };
+    
+    private string ObtenerMensajeComplementario() => Comandos.Count() switch
+    {
+        10 => " - EXPLORACION EXITOSA",
+        > 10 => " - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO",
+        _ => string.Empty
     };
 }
 
