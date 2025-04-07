@@ -35,7 +35,7 @@ public class MRover
             AumentarComandosEjecutados();
         }
 
-        Mensaje = MostrarPosicion();
+        ActualizarMensajePosicion();
     }
 
     private void Avanzar()
@@ -74,7 +74,7 @@ public class MRover
         _cantidadComandosEjecutados++;
     }
     
-    public string MostrarPosicion()
+    public void ActualizarMensajePosicion()
     {
         string direccionText = ObtenerTextoPuntoCardinal();
         string mensaje =  $"POSICION ({Posicion.Y},{Posicion.X}) - DIRECCION {direccionText}";
@@ -84,7 +84,7 @@ public class MRover
         else if (Comandos.Count() > 10 && _cantidadComandosEjecutados == 10)
             mensaje += " - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO";
         
-        return mensaje;
+        Mensaje = mensaje;
     }
 
     private string ObtenerTextoPuntoCardinal() => Posicion.Direccion switch
