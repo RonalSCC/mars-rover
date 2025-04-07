@@ -110,4 +110,21 @@ public class CuadriculaEspecificaciones
         rover.Direccion.Should().Be(PuntosCardinales.Sur);
         rover.Mensaje.Should().Be("POSICION (0,2) - DIRECCION Sur");
     }
+
+    [Fact]
+    public void Debe_el_rover_realizar_una_exploracion_cuando_se_le_indiquen_10_comandos_y_arrojar_un_mensaje_de_su_posicion_junto_a_exploracionExitosa()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("MMMMMMMMMM");
+        
+        // Act
+        cuadricula.IniciarExploracion(rover);
+
+        // Assert
+        rover.PosicionX.Should().Be(0);
+        rover.PosicionY.Should().Be(10);
+        rover.Direccion.Should().Be(PuntosCardinales.Norte);
+        rover.Mensaje.Should().Be("POSICION (10,0) - DIRECCION Norte - EXPLORACION EXITOSA");
+    }
 }
