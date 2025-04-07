@@ -14,7 +14,9 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracionRover(rover);
 
         // Assert
-        rover.posicionActual.Should().Be("0 0 N");
+        rover.posicionX.Should().Be(0);
+        rover.posicionY.Should().Be(0);
+        rover.direccion.Should().Be("N");
     }
 
     [Fact]
@@ -28,13 +30,17 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracionRover(rover);
         
         // Assert
-        rover.posicionActual.Should().Be("0 1 N");
+        rover.posicionX.Should().Be(0);
+        rover.posicionY.Should().Be(1);
+        rover.direccion.Should().Be("N");
     }
 }
 
 public class MRover
 {
-    public string posicionActual = "0 0 N";
+    public int posicionX = 0;
+    public int posicionY = 0;
+    public string direccion = "N";
 
     public MRover(string comando = "")
     {
@@ -43,7 +49,7 @@ public class MRover
 
     private void Avanzar()
     {
-        posicionActual = "0 1 N";
+        posicionY++;
     }
 }
 
