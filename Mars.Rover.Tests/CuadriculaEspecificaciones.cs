@@ -149,4 +149,17 @@ public class CuadriculaEspecificaciones
         rover.Posicion.Direccion.Should().Be(direccionEsperada);
         rover.Mensaje.Should().Be(mensajeEsperado);
     }
+    
+    [Fact]
+    public void Debe_realizar_la_exploración_el_rover_cuando_se_le_indiquen_más_de_10_comandos_y_arrojar_un_mensaje_de_su_posición_junto_a_Exploración_finalizada_Maximo_de_comandos_alcanzado()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("MMMMMMMMMMRMMMMMMMMMM");
+        // Act
+        cuadricula.IniciarExploracion(rover);
+        
+        // Assert
+        rover.Mensaje.Should().Be("POSICION (10,0) - DIRECCION Norte - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO");
+    }
 }
