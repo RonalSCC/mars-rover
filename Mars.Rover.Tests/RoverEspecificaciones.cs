@@ -19,6 +19,7 @@ public class RoverEspecificaciones
         rover.Posicion.X.Should().Be(0);
         rover.Posicion.Y.Should().Be(0);
         rover.Posicion.Direccion.Should().Be(PuntosCardinales.Norte);
+        rover.Mensaje.Should().Be("POSICION (0,0) - DIRECCION Norte");
     }
 
     [Fact]
@@ -79,17 +80,22 @@ public class RoverEspecificaciones
         rover.Posicion.Direccion.Should().Be(PuntosCardinales.Oeste);
     }
 
-    [Fact]
-    public void Debe_mirar_el_rover_al_sur_cuando_se_le_indiquen_dos_comandos_de_giro_y_este_en_0_0_N()
+    [Theory]
+    [InlineData("", PuntosCardinales.Norte)]
+    [InlineData("LL", PuntosCardinales.Sur)]
+    [InlineData("L", PuntosCardinales.Oeste)]
+    [InlineData("R", PuntosCardinales.Este)]
+    [InlineData("RR", PuntosCardinales.Sur)]
+    public void Debe_mirar_el_rover_a_la_posicion_indicada_cuando_se_le_indiquen_comandos_de_giro_y_este_en_0_0_N(string comando, PuntosCardinales direccionEsperada)
     {
         // Arrange
-        var rover = new MRover("LL");
+        var rover = new MRover(comando);
 
         // Act
         rover.IniciarExploracion();
 
         // Assert
-        rover.Posicion.Direccion.Should().Be(PuntosCardinales.Sur);
+        rover.Posicion.Direccion.Should().Be(direccionEsperada);
     }
 
     [Fact]
@@ -174,7 +180,19 @@ public class RoverEspecificaciones
                 "MMMRMMMLMM",
                 new Posicion(3, 5, PuntosCardinales.Norte),
                 "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA"
-            }
+            },
+            new object[]
+            {
+                "MMMRMRMMMR",
+                new Posicion(1, 0, PuntosCardinales.Oeste),
+                "POSICION (0,1) - DIRECCION Oeste - EXPLORACION EXITOSA"
+            },
+            new object[]
+            {
+                "RMMLMMLMML",
+                new Posicion(0, 2, PuntosCardinales.Sur),
+                "POSICION (2,0) - DIRECCION Sur - EXPLORACION EXITOSA"
+            },
         };
     
     public static IEnumerable<object[]> CasosRoverConPosicionInicialYEsperada =>

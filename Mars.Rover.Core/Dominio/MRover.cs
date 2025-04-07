@@ -4,7 +4,7 @@ public class MRover
 {
     public Posicion Posicion { get; private set; } = new(0,0,PuntosCardinales.Norte);
     public List<char> Comandos { get; private set; } = new();
-    public string Mensaje { get; set; } = string.Empty;
+    public string Mensaje { get; set; } = "POSICION (0,0) - DIRECCION Norte";
     
     private int _cantidadComandosEjecutados = 0;
 
@@ -81,7 +81,7 @@ public class MRover
         
         if(Comandos.Count() == 10)
             mensaje += " - EXPLORACION EXITOSA";
-        else if (Comandos.Count() > 10 && _cantidadComandosEjecutados == 10)
+        else if (Comandos.Count() > 10)
             mensaje += " - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO";
         
         Mensaje = mensaje;
