@@ -67,7 +67,12 @@ public class MRover
     public string MostrarPosicion()
     {
         string direccionText = ObtenerTextoPuntoCardinal();
-        return  $"POSICION ({PosicionY},{PosicionX}) - DIRECCION {direccionText}";
+        string mensaje =  $"POSICION ({PosicionY},{PosicionX}) - DIRECCION {direccionText}";
+        
+        if(Comandos.Count() == 10)
+            mensaje += " - EXPLORACION EXITOSA";
+        
+        return mensaje;
     }
 
     private string ObtenerTextoPuntoCardinal() => Direccion switch
