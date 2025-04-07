@@ -16,9 +16,23 @@ public class CuadriculaEspecificaciones
         // Assert
         rover.posicionActual.Should().Be("0 0 N");
     }
+
+    [Fact]
+    public void Debe_avanzar_el_rover_una_celda_hacia_adelante_cuando_tenga_espacio_en_la_cuadricula_y_se_indique_el_comando_M()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("M");
+        
+        // Act
+        cuadricula.IniciarExploracionRover(rover);
+        
+        // Assert
+        rover.posicionActual.Should().Be("0 1 N");
+    }
 }
 
-public class MRover
+public class MRover(string comando = "")
 {
     public string posicionActual = "0 0 N";
 }

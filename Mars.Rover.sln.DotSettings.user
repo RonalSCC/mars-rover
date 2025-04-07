@@ -1,6 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b2716de5_002D46f8_002D46e8_002D97ee_002Dca37c3813d4c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Debe_iniciar_el_rover_su_exploracion_en_la_posicion_0_0_N" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::1F7041D3-FD31-44CD-A054-4E884495EF00::net9.0::Mars.Rover.Tests.CuadriculaEspecificaciones.Debe_iniciar_el_rover_su_exploracion_en_la_posicion_0_0_N&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::1F7041D3-FD31-44CD-A054-4E884495EF00::net9.0::Mars.Rover.Tests.CuadriculaEspecificaciones&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
