@@ -94,21 +94,24 @@ public class CuadriculaEspecificaciones
         resultadoExploracion.Should().ThrowExactly<SinEspacioException>();
     }
 
-    [Fact]
-    public void Debe_el_rover_indicar_su_posicion_cuando_finalice_su_exploracion_segun_una_serie_de_comandos()
+    [Theory]
+    [InlineData("MMRMMRMM", 2,0, PuntosCardinales.Sur,"POSICION (0,2) - DIRECCION Sur")]
+    [InlineData("RMMMMM", 5,0, PuntosCardinales.Este,"POSICION (0,5) - DIRECCION Este")]
+    [InlineData("MMMRMMMLM", 3,4, PuntosCardinales.Norte,"POSICION (4,3) - DIRECCION Norte")]
+    public void Debe_el_rover_indicar_su_posicion_cuando_finalice_su_exploracion_segun_una_serie_de_comandos(string comando, int posicionXEsperada, int posicionYEsperada, PuntosCardinales direccionEsperada, string mensajeEsperado)
     {
         // Arrange
         var cuadricula = new Cuadricula();
-        var rover = new MRover("MMRMMRMM");
+        var rover = new MRover(comando);
 
         // Act
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.PosicionX.Should().Be(2);
-        rover.PosicionY.Should().Be(0);
-        rover.Direccion.Should().Be(PuntosCardinales.Sur);
-        rover.Mensaje.Should().Be("POSICION (0,2) - DIRECCION Sur");
+        rover.PosicionX.Should().Be(posicionXEsperada);
+        rover.PosicionY.Should().Be(posicionYEsperada);
+        rover.Direccion.Should().Be(direccionEsperada);
+        rover.Mensaje.Should().Be(mensajeEsperado);
     }
 
     [Fact]
