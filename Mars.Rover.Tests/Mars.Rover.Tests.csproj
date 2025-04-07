@@ -19,4 +19,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Mars.Rover.Core\Mars.Rover.Core.csproj" />
+    </ItemGroup>
+
 </Project>

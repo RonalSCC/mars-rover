@@ -5,7 +5,7 @@
 - [x] Debe girar el rover a la izquierda cuando reciba el comando "L".
 - [x] Debe indicar SinEspacioException el rover cuando no tenga espacio para moverse adelante este en 0 0 N y se le de el comando "L" y "M".
 - [x] Debe el rover mirar hacia el Sur cuando reciba el comando de girar dos veces y esté en posición inicial.  
-- [ ] Debe el rover indicar su posicion cuando se le indique una serie de comandos para su exploracion
+- [x] Debe el rover indicar su posicion cuando se le indique una serie de comandos para su exploracion
 - [] Debe realizar la exploración el rover cuando se le indiquen 10 comandos y arrojar un mensaje de su posición junto a "Exploración exitosa". 
 - [] Debe realizar la exploración el rover cuando se le indiquen más de 10 comandos y arrojar un mensaje de su posición junto a "Exploración finalizada - Maximo de comandos alcanzado".
 - [] Debe la cuadricula permitir exploraciones de 3 rovers secuencialmente cuando se les indique una sencuencia de comandos a cada uno.
