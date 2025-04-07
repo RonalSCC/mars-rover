@@ -27,11 +27,12 @@ public class CuadriculaEspecificaciones
     {
         // Arrange
         var cuadricula = new Cuadricula();
-        var rover = new MRover("", 1,2, PuntosCardinales.Norte);
+        var posicionInicial = new Posicion(1, 2, PuntosCardinales.Norte);
+        var rover = new MRover("", posicionInicial);
 
         // Act
         cuadricula.IniciarExploracion(rover);
-        
+
         // Assert
         rover.Posicion.X.Should().Be(1);
         rover.Posicion.Y.Should().Be(2);
@@ -39,7 +40,8 @@ public class CuadriculaEspecificaciones
     }
 
     [Fact]
-    public void Debe_avanzar_el_rover_una_celda_hacia_adelante_cuando_tenga_espacio_en_la_cuadricula_y_se_indique_el_comando_M()
+    public void
+        Debe_avanzar_el_rover_una_celda_hacia_adelante_cuando_tenga_espacio_en_la_cuadricula_y_se_indique_el_comando_M()
     {
         // Arrange
         var cuadricula = new Cuadricula();
@@ -97,7 +99,8 @@ public class CuadriculaEspecificaciones
     }
 
     [Fact]
-    public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_este_en_0_0_N_y_su_comando_sea_L_y_M()
+    public void
+        Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_este_en_0_0_N_y_su_comando_sea_L_y_M()
     {
         // Arrange
         var cuadricula = new Cuadricula();
@@ -111,10 +114,10 @@ public class CuadriculaEspecificaciones
     }
 
     [Theory]
-    [InlineData("MMRMMRMM", 2,0, PuntosCardinales.Sur,"POSICION (0,2) - DIRECCION Sur")]
-    [InlineData("RMMMMM", 5,0, PuntosCardinales.Este,"POSICION (0,5) - DIRECCION Este")]
-    [InlineData("MMMRMMMLM", 3,4, PuntosCardinales.Norte,"POSICION (4,3) - DIRECCION Norte")]
-    public void Debe_el_rover_indicar_su_posicion_cuando_finalice_su_exploracion_segun_una_serie_de_comandos(string comando, int posicionXEsperada, int posicionYEsperada, PuntosCardinales direccionEsperada, string mensajeEsperado)
+    [MemberData(nameof(CasosRoverConPosicionEsperada))]
+    public void
+        Debe_el_rover_realizar_una_exploracion_cuando_se_le_indiquen_10_comandos_y_arrojar_un_mensaje_de_su_posicion_junto_a_exploracionExitosa(
+            string comando, Posicion posicionEsperada,string mensajeEsperado)
     {
         // Arrange
         var cuadricula = new Cuadricula();
@@ -124,42 +127,83 @@ public class CuadriculaEspecificaciones
         cuadricula.IniciarExploracion(rover);
 
         // Assert
-        rover.Posicion.X.Should().Be(posicionXEsperada);
-        rover.Posicion.Y.Should().Be(posicionYEsperada);
-        rover.Posicion.Direccion.Should().Be(direccionEsperada);
-        rover.Mensaje.Should().Be(mensajeEsperado);
-    }
-
-    [Theory]
-    [InlineData("MMMMMMMMMM", 0, 10, PuntosCardinales.Norte, "POSICION (10,0) - DIRECCION Norte - EXPLORACION EXITOSA")]
-    [InlineData("MMMRMMMLMM", 3, 5, PuntosCardinales.Norte, "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA")]
-    [InlineData("MMMRMMMLMM", 3, 5, PuntosCardinales.Norte, "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA")]
-    public void Debe_el_rover_realizar_una_exploracion_cuando_se_le_indiquen_10_comandos_y_arrojar_un_mensaje_de_su_posicion_junto_a_exploracionExitosa(string comando, int posicionXEsperada, int posicionYEsperada, PuntosCardinales direccionEsperada, string mensajeEsperado)
-    {
-        // Arrange
-        var cuadricula = new Cuadricula();
-        var rover = new MRover(comando);
-        
-        // Act
-        cuadricula.IniciarExploracion(rover);
-
-        // Assert
-        rover.Posicion.X.Should().Be(posicionXEsperada);
-        rover.Posicion.Y.Should().Be(posicionYEsperada);
-        rover.Posicion.Direccion.Should().Be(direccionEsperada);
+        rover.Posicion.X.Should().Be(posicionEsperada.X);
+        rover.Posicion.Y.Should().Be(posicionEsperada.Y);
+        rover.Posicion.Direccion.Should().Be(posicionEsperada.Direccion);
         rover.Mensaje.Should().Be(mensajeEsperado);
     }
     
+    [Theory]
+    [MemberData(nameof(CasosRoverConPosicionInicialYEsperada))]
+    public void
+        Debe_el_rover_indicar_su_posicion_cuando_finalice_su_exploracion_segun_una_serie_de_comandos_y_una_posicion_inicial(
+            string comando, Posicion? posicionInicial, Posicion posicionEsperada, string mensajeEsperado
+        )
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover(comando, posicionInicial);
+
+        // Act
+        cuadricula.IniciarExploracion(rover);
+
+        // Assert
+        rover.Posicion.X.Should().Be(posicionEsperada.X);
+        rover.Posicion.Y.Should().Be(posicionEsperada.Y);
+        rover.Posicion.Direccion.Should().Be(posicionEsperada.Direccion);
+        rover.Mensaje.Should().Be(mensajeEsperado);
+    }
+
     [Fact]
-    public void Debe_realizar_la_exploración_el_rover_cuando_se_le_indiquen_más_de_10_comandos_y_arrojar_un_mensaje_de_su_posición_junto_a_Exploración_finalizada_Maximo_de_comandos_alcanzado()
+    public void
+        Debe_realizar_la_exploración_el_rover_cuando_se_le_indiquen_más_de_10_comandos_y_arrojar_un_mensaje_de_su_posición_junto_a_Exploración_finalizada_Maximo_de_comandos_alcanzado()
     {
         // Arrange
         var cuadricula = new Cuadricula();
         var rover = new MRover("MMMMMMMMMMRMMMMMMMMMM");
         // Act
         cuadricula.IniciarExploracion(rover);
-        
+
         // Assert
-        rover.Mensaje.Should().Be("POSICION (10,0) - DIRECCION Norte - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO");
+        rover.Mensaje.Should()
+            .Be("POSICION (10,0) - DIRECCION Norte - EXPLORACION FINALIZADA - MAXIMO DE COMANDOS ALCANZADO");
     }
+
+    public static IEnumerable<object[]> CasosRoverConPosicionEsperada =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                "MMMMMMMMMM",
+                new Posicion(0, 10, PuntosCardinales.Norte),
+                "POSICION (10,0) - DIRECCION Norte - EXPLORACION EXITOSA",
+            },
+            new object[]
+            {
+                "MMMRMMMLMM",
+                new Posicion(3, 5, PuntosCardinales.Norte),
+                "POSICION (5,3) - DIRECCION Norte - EXPLORACION EXITOSA"
+            }
+        };
+    
+    public static IEnumerable<object[]> CasosRoverConPosicionInicialYEsperada =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                "LMLMLMLMM",
+                new Posicion(1, 2, PuntosCardinales.Norte),
+                new Posicion(1, 3, PuntosCardinales.Norte),
+                "POSICION (3,1) - DIRECCION Norte",
+            },
+            new object[]
+            {
+                "MMRMMRMRRM",
+                new Posicion(3,3, PuntosCardinales.Este),
+                new Posicion(5, 1, PuntosCardinales.Este),
+                "POSICION (1,5) - DIRECCION Este - EXPLORACION EXITOSA"
+            }
+        };
+    
+
 }

@@ -8,15 +8,12 @@ public class MRover
     
     private int _cantidadComandosEjecutados = 0;
 
-    public MRover(string comandos = "", int posicionX = 0, int posicionY = 0, PuntosCardinales direccion = PuntosCardinales.Norte)
+    public MRover(string comandos = "", Posicion? posicionInicial = null)
     {
-        Posicion.X = posicionX;
-        Posicion.Y = posicionY;
-        Posicion.Direccion = direccion;
+        if(posicionInicial != null) Posicion = posicionInicial;
+        
         foreach (char comando in comandos)
-        {
             Comandos.Add(comando);
-        }
     }
 
     public void IniciarExploracionRover()
@@ -52,7 +49,10 @@ public class MRover
 
     private void GirarDerecha()
     {
-        Posicion.Direccion++;
+        if(Posicion.Direccion == PuntosCardinales.Oeste)
+            Posicion.Direccion = PuntosCardinales.Norte;
+        else
+            Posicion.Direccion++;
     }
 
     private void GirarIzquierda()

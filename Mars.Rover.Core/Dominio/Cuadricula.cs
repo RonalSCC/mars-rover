@@ -6,12 +6,4 @@ public class Cuadricula
     {
         rover.IniciarExploracionRover();
     }
-
-    public void IniciarExploracion(MRover[] rovers)
-    {
-        foreach (var mRover in rovers)
-        {
-            mRover.IniciarExploracionRover();
-        }
-    }
 }
