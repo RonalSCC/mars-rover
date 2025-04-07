@@ -11,7 +11,7 @@ public class CuadriculaEspecificaciones
         var rover = new MRover();
 
         // Act
-        cuadricula.IniciarExploracionRover(rover);
+        cuadricula.IniciarExploracion(rover);
 
         // Assert
         rover.PosicionX.Should().Be(0);
@@ -27,7 +27,7 @@ public class CuadriculaEspecificaciones
         var rover = new MRover("M");
         
         // Act
-        cuadricula.IniciarExploracionRover(rover);
+        cuadricula.IniciarExploracion(rover);
         
         // Assert
         rover.PosicionX.Should().Be(0);
@@ -43,7 +43,7 @@ public class CuadriculaEspecificaciones
         var rover = new MRover("R");
         
         // Act
-        cuadricula.IniciarExploracionRover(rover);
+        cuadricula.IniciarExploracion(rover);
         
         // Assert
         rover.Direccion.Should().Be("E");
@@ -57,12 +57,26 @@ public class CuadriculaEspecificaciones
         var rover = new MRover("L");
         
         // Act
-        cuadricula.IniciarExploracionRover(rover);
+        cuadricula.IniciarExploracion(rover);
         
         // Assert
         rover.Direccion.Should().Be("O");
     }
-    
+
+    [Fact]
+    public void Debe_mirar_el_rover_al_sur_cuando_se_le_indiquen_dos_comandos_de_giro_y_este_en_0_0_N()
+    {
+        // Arrange
+        var cuadricula = new Cuadricula();
+        var rover = new MRover("LL");
+        
+        // Act
+        cuadricula.IniciarExploracion(rover);
+        
+        // Assert
+        rover.Direccion.Should().Be("S");
+    }
+
     [Fact]
     public void Debe_indicar_SinEspacioException_el_rover_cuando_no_tenga_espacio_para_moverse_adelante_este_en_0_0_N_y_su_comando_sea_L_y_M()
     {
@@ -71,7 +85,7 @@ public class CuadriculaEspecificaciones
         var rover = new MRover("LM");
         
         // Act
-        var resultadoExploracion = () => cuadricula.IniciarExploracionRover(rover);
+        var resultadoExploracion = () => cuadricula.IniciarExploracion(rover);
         
         // Assert
         resultadoExploracion.Should().ThrowExactly<SinEspacioException>();
@@ -126,7 +140,7 @@ public class MRover
 
 public class Cuadricula
 {
-    public void IniciarExploracionRover(MRover rover)
+    public void IniciarExploracion(MRover rover)
     {
         if(rover.Comando == "LM") 
             throw new SinEspacioException();
